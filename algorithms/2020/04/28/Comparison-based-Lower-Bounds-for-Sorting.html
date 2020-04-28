@@ -8,15 +8,15 @@
 <meta property="og:title" content="Comparison-based Lower Bounds for Sorting" />
 <meta name="author" content="Teja Kummarikuntla" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$" />
-<meta property="og:description" content="This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$" />
+<meta name="description" content="This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$" />
+<meta property="og:description" content="This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$" />
 <link rel="canonical" href="https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html" />
 <meta property="og:url" content="https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html" />
 <meta property="og:site_name" content="tejakummarikuntla" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-28T00:00:00-05:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html","headline":"Comparison-based Lower Bounds for Sorting","dateModified":"2020-04-28T00:00:00-05:00","datePublished":"2020-04-28T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html","headline":"Comparison-based Lower Bounds for Sorting","dateModified":"2020-04-28T00:00:00-05:00","datePublished":"2020-04-28T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/notes/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://tejakummarikuntla.github.io/notes/feed.xml" title="tejakummarikuntla" /><link rel="shortcut icon" type="image/x-icon" href="/notes/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Comparison-based Lower Bounds for Sorting | tejakummarikuntla</title>
@@ -24,15 +24,15 @@
 <meta property="og:title" content="Comparison-based Lower Bounds for Sorting" />
 <meta name="author" content="Teja Kummarikuntla" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$" />
-<meta property="og:description" content="This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$" />
+<meta name="description" content="This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$" />
+<meta property="og:description" content="This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$" />
 <link rel="canonical" href="https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html" />
 <meta property="og:url" content="https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html" />
 <meta property="og:site_name" content="tejakummarikuntla" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-28T00:00:00-05:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html","headline":"Comparison-based Lower Bounds for Sorting","dateModified":"2020-04-28T00:00:00-05:00","datePublished":"2020-04-28T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/algorithms/2020/04/28/Comparison-based-Lower-Bounds-for-Sorting.html","headline":"Comparison-based Lower Bounds for Sorting","dateModified":"2020-04-28T00:00:00-05:00","datePublished":"2020-04-28T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -103,7 +103,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Comparison-based Lower Bounds for Sorting</h1><p class="page-description">This article proves that no possibility of having Comparison based sorting algorithm better than $O(nlogn)$</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-28T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Comparison-based Lower Bounds for Sorting</h1><p class="page-description">This article proves that there exists no possibility of having a Comparison-based sorting algorithm better than $O(nlogn)$</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-28T00:00:00-05:00" itemprop="datePublished">
         Apr 28, 2020
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -247,8 +247,8 @@ The possible solutions would be</p>
 <li>$a_3, a_1, a_2$</li>
 <li>$a_3, a_2, a_1$</li>
 </ul>
-<p>The possible asceding order would be one among these 6.
-Which means the number of outcome is $n!$. Number of ways we can arrage n elements in $n!$</p>
+<p>The possible ascending order would be one among these 6.
+Which means the number of outcomes is $n!$.The Number of ways we can arrange n elements in $n!$</p>
 
 </div>
 </div>
@@ -259,7 +259,7 @@ Which means the number of outcome is $n!$. Number of ways we can arrage n elemen
 <p></p>
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>1. N elements gives $N!$ arrangements
+    <strong>Note: </strong>1. N elements give $N!$ arrangements
 </div>
 
 </div>
@@ -268,7 +268,7 @@ Which means the number of outcome is $n!$. Number of ways we can arrage n elemen
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's assume an abstract approach of comprarision based sorting algorithm using a <strong>Binary Decision trees</strong>,</p>
+<p>Let's assume an abstract approach of a comparison-based sorting algorithm using a <strong>Binary Decision tree</strong>,</p>
 <p><img src="/notes/images/copied_from_nb/Images/binary_decision_tree.png" alt=""></p>
 
 </div>
@@ -277,8 +277,8 @@ Which means the number of outcome is $n!$. Number of ways we can arrage n elemen
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The possible arrangements of three elements are the leaf nodes of the Binary Decision Tree.
-From this we can say that the number of possible arrangements of n elements is equal to the number of leaf nodes in a binary decision tree.
+<p>The possible arrangements of the three elements are the leaf nodes of the Binary Decision Tree.
+From this, we can say that the number of possible arrangements of n elements is equal to the number of leaf nodes in a binary decision tree.
 </p>
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
@@ -291,7 +291,7 @@ From this we can say that the number of possible arrangements of n elements is e
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's look into the hight of the tree. At each level of the tree we are making a decision, which means the height of the tree at a particular leaf will tells us the number of comprisions we made to reach that arrangement.</p>
+<p>Now, let's look into the hight of the tree. At each level of the tree we are making a decision, which means the height of the tree at a particular leaf will tell us the number of comparisons we made to reach that arrangement.</p>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ From this we can say that the number of possible arrangements of n elements is e
 <p></p>
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>3. hight of the tree = # comparisions we made
+    <strong>Note: </strong>3. hight of the tree = # comparisons we made
 </div>
 
 </div>
@@ -319,7 +319,7 @@ From this we can say that the number of possible arrangements of n elements is e
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>From the Full binary tree above we can say that the number of leaf nodes of this treeis $2^{height}$ and there is no possibility that the leaf nodes can more than $2^{height}$
+<p>From the Full binary tree above we can say that the number of leaf nodes of this tree is $2^{height}$ and there is no possibility that the leaf nodes can more than $2^{height}$
 </p>
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
@@ -332,7 +332,7 @@ From this we can say that the number of possible arrangements of n elements is e
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, if we were given a binary decision tree for perfoming soritng which has $n!$[ref: <code>Note2</code>] leaf nodes, from the <code>Note3</code>, we can say that.</p>
+<p>Now, if we were given a binary decision tree for performing sorting  which has $n!$[ref: <code>Note2</code>] leaf nodes, from the <code>Note3</code>, we can say that.</p>
 <p>If <code>h</code> is the height of the Binary Decision tree that we are building for sorting <code>n</code> elements then,</p>
 <p>
 $$2^{h} \geq n! $$
@@ -344,7 +344,7 @@ $$2^{h} \geq n! $$
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As log is a monotonic function, we can apply log on both sides,</p>
+<p>As the <code>log</code> is a monotonic function, we can apply log on both sides,</p>
 
 </div>
 </div>
@@ -362,12 +362,12 @@ $$h \ge log(n!)$$
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we can figure out the h value which is the height, in return we can figure out the comprarision, from the asymptotic equations of grwoth of functions we know that,</p>
+<p>Now, we can calculate the <code>h</code> value which is the height, in return, we can figure out the comparison, from the asymptotic equations of growth of functions we know that,</p>
 <p>
 $$log(n!) = \theta(nlogn)$$
 
 
-$$log(n!) = \Omega(nlonn)$$
+$$log(n!) = \Omega(nlogn)$$
 
 </p>
 <div class="flash flash-success">
@@ -378,7 +378,7 @@ using the above equations, we can say
 <p>
 $$h = \Omega(nlogn)$$
 </p>
-<p>Which means, the height of the binary decision tree for soritn n elements, is lower bounded by $nlognn$, In which <code>height</code> is the number of comprasions we have to make.</p>
+<p>Which means, the height of the binary decision tree for sorting n elements is lower bounded by $nlogn$, In which <code>height</code> is the number of comparisons we have to make.</p>
 <p>From this we can say:
 </p>
 <div class="flash">
@@ -396,7 +396,7 @@ The Number of comparisions is lower bounded by $nlogn$.
 <p></p>
 <div class="flash flash-warn">
     <svg class="octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
-    <strong>Important: </strong>From this we can conclud that no matter of any comprarion based algorithms, we are bounded by the fact that the worst case time complexity if lower bounded by $nlogn$. It means, we can not have a comprasion based algorithm which can perfome better than $nlogn$
+    <strong>Important: </strong>From this, we can conclude that no matter of any comparison-based algorithms, we are bounded by the fact that the worst-case time complexity is lower bounded by $nlogn$. It means, we can not have a comparison-based algorithm which can perform better than $nlogn$
 </div>
 
 </div>
@@ -411,7 +411,7 @@ The Number of comparisions is lower bounded by $nlogn$.
 <ul>
 <li>Run-time limits of comparison-based sorting algorithms <a href="https://diego.assencio.com/?index=143ab4f37feadc3ac69f33f43fde3a2a">Blog</a>
 </li>
-<li>Comprarision Based sorting <a href="https://opendatastructures.org/ods-java/11_1_Comparison_Based_Sorti.html">Blog</a>
+<li>Comparison Based sorting <a href="https://opendatastructures.org/ods-java/11_1_Comparison_Based_Sorti.html">Blog</a>
 </li>
 <li>Comparison-based Lower Bounds for Sorting <a href="https://www.cs.cmu.edu/~avrim/451f11/lectures/lect0913.pdf">PDF</a>
 </li>
