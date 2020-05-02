@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Monte Carlo Simulation | tejakummarikuntla</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Monte Carlo Simulation" />
+<meta name="author" content="Teja Kummarikuntla" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Imitation of a specific functionality to perfome probability analysis with various Math concepts" />
+<meta property="og:description" content="Imitation of a specific functionality to perfome probability analysis with various Math concepts" />
+<link rel="canonical" href="https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html" />
+<meta property="og:url" content="https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html" />
+<meta property="og:site_name" content="tejakummarikuntla" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-28T00:00:00-06:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"Imitation of a specific functionality to perfome probability analysis with various Math concepts","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html","headline":"Monte Carlo Simulation","dateModified":"2020-01-28T00:00:00-06:00","datePublished":"2020-01-28T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/notes/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://tejakummarikuntla.github.io/notes/feed.xml" title="tejakummarikuntla" /><link rel="shortcut icon" type="image/x-icon" href="/notes/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Monte Carlo Simulation | tejakummarikuntla</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Monte Carlo Simulation" />
+<meta name="author" content="Teja Kummarikuntla" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Imitation of a specific functionality to perfome probability analysis with various Math concepts" />
+<meta property="og:description" content="Imitation of a specific functionality to perfome probability analysis with various Math concepts" />
+<link rel="canonical" href="https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html" />
+<meta property="og:url" content="https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html" />
+<meta property="og:site_name" content="tejakummarikuntla" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-28T00:00:00-06:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"Imitation of a specific functionality to perfome probability analysis with various Math concepts","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/math/2020/01/28/Monte-Carlo.html","headline":"Monte Carlo Simulation","dateModified":"2020-01-28T00:00:00-06:00","datePublished":"2020-01-28T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://tejakummarikuntla.github.io/notes/feed.xml" title="tejakummarikuntla" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/notes/">tejakummarikuntla</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/notes/contact/">Contact</a><a class="page-link" href="/notes/search/">Search</a><a class="page-link" href="/notes/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Monte Carlo Simulation</h1><p class="page-description">Imitation of a specific functionality to perfome probability analysis with various Math concepts</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-01-28T00:00:00-06:00" itemprop="datePublished">
+        Jan 28, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Teja Kummarikuntla</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/notes/categories/#Math">Math</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/tejakummarikuntla/notes/tree/master/_notebooks/2020-01-28-Monte-Carlo.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/notes/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/tejakummarikuntla/notes/master?filepath=_notebooks%2F2020-01-28-Monte-Carlo.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notes/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/tejakummarikuntla/notes/blob/master/_notebooks/2020-01-28-Monte-Carlo.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notes/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Monte-Carlo-Simulation">Monte Carlo Simulation </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Example:">Example: </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Why-the-difference-in-Confidence?">Why the difference in Confidence? </a></li>
+<li class="toc-entry toc-h3"><a href="#looking-into-Roulette.">looking into Roulette. </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Law-of-Large-Numbers">Law of Large Numbers </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Independent-and-Identically-Distributed">Independent and Identically Distributed </a></li>
+<li class="toc-entry toc-h3"><a href="#Gambler's-fallacy">Gambler&#39;s fallacy </a></li>
+<li class="toc-entry toc-h3"><a href="#Regression-to-the-Mean">Regression to the Mean </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Confidence-Levels-and-Intervals">Confidence Levels and Intervals </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-01-28-Monte-Carlo.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Monte-Carlo-Simulation">
+<a class="anchor" href="#Monte-Carlo-Simulation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Monte Carlo Simulation<a class="anchor-link" href="#Monte-Carlo-Simulation"> </a>
+</h1>
+<p>ref: <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/">https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/</a></p>
+<p>A method of estimating the value of an unknown quantity using the principles of inferential statistics.</p>
+<ul>
+<li>
+<p>Inferentila Statistics</p>
+<ul>
+<li>
+<em>Population</em>: a set of examples</li>
+<li>
+<em>Sample</em>: s proper subset of a population</li>
+<li>key fact: a <em>random Sample</em> tends to exhibit the same properties as the population from which it is drawn</li>
+</ul>
+</li>
+<li>
+<p>We make an inference about the population based upon some set of statistics we do on the sample.</p>
+</li>
+<li>if we start drawing and the sample is not random then there is no reason to expect the same properties as that of the population.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example:">
+<a class="anchor" href="#Example:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example:<a class="anchor-link" href="#Example:"> </a>
+</h2>
+<p>Given a single coin, estimate fraction of heads you would get if you flipped the coin an infinite number of times.</p>
+<ul>
+<li>Consier one flip and you got Heads, Now how about saying the probability of getting heads for the next time is 1.0.</li>
+<li>Let's flip the coin again, you the Heads again.</li>
+<li>Flip the coin for 100 times, still you get the heads, now do you think that the next flip will come up heads?</li>
+<li>
+<p>Next, flipping the coin 100 Times, you noticed</p>
+<ul>
+<li>50 Heads</li>
+<li>48 Tails</li>
+<li>
+<p>02 Heads
+in a series.</p>
+<p>Do you think the probability of the next flip coming up heads is $\frac{52}{100}$?</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Given the data, it's your best to estimate. But confidence should be low.</p>
+<h3 id="Why-the-difference-in-Confidence?">
+<a class="anchor" href="#Why-the-difference-in-Confidence?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why the difference in Confidence?<a class="anchor-link" href="#Why-the-difference-in-Confidence?"> </a>
+</h3>
+<ul>
+<li>Confidence in our estimate depends upon two things<ul>
+<li>Size of sample(e.g 100 versus 2)</li>
+<li>variance of sample(e.g, all heads versus 52 heads)</li>
+<li>As the variance grows, we need larger sample to have the same degree of confidence.</li>
+</ul>
+</li>
+</ul>
+<h3 id="looking-into-Roulette.">
+<a class="anchor" href="#looking-into-Roulette." aria-hidden="true"><span class="octicon octicon-link"></span></a>looking into Roulette.<a class="anchor-link" href="#looking-into-Roulette."> </a>
+</h3>
+<p>As the win or loose is very quick and the possiblites are more often in the game. We don't need to simulate, since answers obbious</p>
+<p>It allow us to compare simulaiton results to actual probabilities</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">FairRoulette</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pockets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># One to 36 Pockets</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">37</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pockets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># if you bet on a pocket and you win, you get len(pockets) - 1</span>
+        <span class="c1"># You bet a dollar if you win, you get $36, which means </span>
+        <span class="c1"># your dollar + $35 back. If you loose you loose all.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pocketOdds</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pockets</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">spin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pockets</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">betPocket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pocket</span><span class="p">,</span> <span class="n">amt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">pocket</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">amt</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pocketOdds</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="o">-</span><span class="n">amt</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">'Fair Roulette'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">playRoulette</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">numSpins</span><span class="p">,</span> <span class="n">pocket</span><span class="p">,</span> <span class="n">bet</span><span class="p">,</span> <span class="n">toPrint</span><span class="p">):</span>
+    <span class="n">totPocket</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numSpins</span><span class="p">):</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+        <span class="n">totPocket</span> <span class="o">+=</span> <span class="n">game</span><span class="o">.</span><span class="n">betPocket</span><span class="p">(</span><span class="n">pocket</span><span class="p">,</span> <span class="n">bet</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">toPrint</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">numSpins</span><span class="p">,</span> <span class="s1">'spins of'</span><span class="p">,</span> <span class="n">game</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Expected return betting'</span><span class="p">,</span> <span class="n">pocket</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span>\
+              <span class="nb">str</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">totPocket</span><span class="o">/</span><span class="n">numSpins</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'%</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">totPocket</span><span class="o">/</span><span class="n">numSpins</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Let's play the game</span>
+<span class="n">game</span> <span class="o">=</span> <span class="n">FairRoulette</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">numSpins</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000000</span><span class="p">):</span>
+    <span class="c1"># We are gonna see what happens when we spin it 100 times</span>
+    <span class="c1"># and what happens when we spin it 1000000 times.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">playRoulette</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">numSpins</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>100 spins of Fair Roulette
+Expected return betting 2 = 80.0%
+
+100 spins of Fair Roulette
+Expected return betting 2 = -28.0%
+
+100 spins of Fair Roulette
+Expected return betting 2 = 8.0%
+
+1000000 spins of Fair Roulette
+Expected return betting 2 = -0.3124%
+
+1000000 spins of Fair Roulette
+Expected return betting 2 = 0.4796%
+
+1000000 spins of Fair Roulette
+Expected return betting 2 = 0.314%
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What's gooing on here called the law of large numbers, or sometimes <strong>Bernoulli's law</strong>.</p>
+<h2 id="Law-of-Large-Numbers">
+<a class="anchor" href="#Law-of-Large-Numbers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Law of Large Numbers<a class="anchor-link" href="#Law-of-Large-Numbers"> </a>
+</h2>
+<ul>
+<li>In repeated independnet tests with the same actual probability <code>p</code> of a aprticular outocme in each test, the chance that the fraction of times that outcome occurs differs from <code>p</code> converges to zero as the number of trails goes to infinity</li>
+</ul>
+<p>This says, If I were to spin this roulette wheel infinite number of times, the expected return would be 0. 
+The real true probability from the mathematics.</p>
+<p>And what this says is the close I get to inifnite, the close it will be to the true probaility.</p>
+<ul>
+<li>The law of large numbers is a theorem from probability and statistics that suggests that the average result from repeating an experiment multiple times will better approximate the true or expected underlying result. <em>ref</em>:<a href="https://machinelearningmastery.com/a-gentle-introduction-to-the-law-of-large-numbers-in-machine-learning/">https://machinelearningmastery.com/a-gentle-introduction-to-the-law-of-large-numbers-in-machine-learning/</a>
+</li>
+</ul>
+<h3 id="Independent-and-Identically-Distributed">
+<a class="anchor" href="#Independent-and-Identically-Distributed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Independent and Identically Distributed<a class="anchor-link" href="#Independent-and-Identically-Distributed"> </a>
+</h3>
+<p>It is important to be clear that the observations in the sample must be independent.</p>
+<h3 id="Gambler's-fallacy">
+<a class="anchor" href="#Gambler's-fallacy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gambler's fallacy<a class="anchor-link" href="#Gambler's-fallacy"> </a>
+</h3>
+<p>Also known as the Monte Carlo Fallacy, the Gambler's Fallacy occurs when an individual erroneously believes that a certain random event is less likely or more likely, given a previous event or a series of events. This line of thinking is incorrect, since past events do not change the probability that certain events will occur in the future.</p>
+<hr>
+<p>"On August 18, 1913, at casino in Monte Carlo, black came up a record twenty-six times in succession[in roulette]...[Threre] was a nerar-panicky rush to bet on red, beginning about the time black had come up a phenomenal fifteen times." --HUff and Geis, How to Take a Chace.</p>
+<ul>
+<li>The Probability of 26 consecutive reds: $\frac{1}{67,108,865}$</li>
+<li>The Probability of 26 consecutive reds when previous 25 rolls were red: $\frac{1}{2}$</li>
+</ul>
+<p>There's something that it's gambler's fallacy that's often confused with it, and that's called <strong>Regression to the Mean</strong>.
+This term was coined in 1885by Francis Galton.</p>
+<p>The paper by him say:</p>
+<p>if somebody's parents are both taller than average, it's likely that the child will be smaller thatn the parents.
+Conversely, if the parents are shorter than average, it's likely that the child will be taller than average. Then he came up with this Regression to the Mean.</p>
+<h3 id="Regression-to-the-Mean">
+<a class="anchor" href="#Regression-to-the-Mean" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regression to the Mean<a class="anchor-link" href="#Regression-to-the-Mean"> </a>
+</h3>
+<p>ref:<a href="https://www.youtube.com/watch?v=1tSqSMOyNFE">https://www.youtube.com/watch?v=1tSqSMOyNFE</a>
+We expect that a single result or the mean result from a small sample is likely. That is close to the central tendency, the mean of the population distribution. It may not be; in fact, it may be very strange or unlikely.</p>
+<p>As we increase the sample size, the finding or mean of the sample will move back toward the population mean, back toward the true underlying expected value. This is called regression to the mean or sometimes reversion to the mean.</p>
+<hr>
+<ul>
+<li>Following an exreeme random event, the next random event is likely to be less extreme.
+Let's understand in roulette.
+#### Example:
+If you spin a fair roulette wheel 10 times and get 100% red[10 reds], that is an extreme event (probability = $\frac{1}{1024}$)</li>
+<li>Now the <strong>Gambler's fallacy</strong> says, If I were to spin it another 10 times, it would need to even out. As in I should get more blacks than you would usually get to make up for these excess reds.</li>
+<li>
+<p>Now, What <strong>Regression to the Mean</strong> says, is differnt. It says, It's likely that in the next 10 spins, you will get fewer than 10 reds.</p>
+</li>
+<li>
+<p>So, If you look at the average of the 20 spins, it will be closer to the expected mean of 50% reds than to the 100% of the first 10 spins. So that's why it's called <strong>regression to the mean</strong>
+<strong>The more samples you take, the more likely you'll get to the mean.</strong></p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">EuRoulette</span><span class="p">(</span><span class="n">FairRoulette</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">FairRoulette</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pockets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">'European Roulette'</span>
+<span class="k">class</span> <span class="nc">AmRoulette</span><span class="p">(</span><span class="n">EuRoulette</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">EuRoulette</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pockets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'00'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">'American Roulette'</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">findPocketReturn</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">numTrials</span><span class="p">,</span> <span class="n">trialSize</span><span class="p">,</span> <span class="n">toPrint</span><span class="p">):</span>
+    <span class="n">pocketReturns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTrials</span><span class="p">):</span>
+        <span class="n">trialVals</span> <span class="o">=</span> <span class="n">playRoulette</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">trialSize</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">toPrint</span><span class="p">)</span>
+        <span class="n">pocketReturns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trialVals</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pocketReturns</span>
+
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">numTrials</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">resultDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">games</span> <span class="o">=</span> <span class="p">(</span><span class="n">FairRoulette</span><span class="p">,</span> <span class="n">EuRoulette</span><span class="p">,</span> <span class="n">AmRoulette</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">G</span> <span class="ow">in</span> <span class="n">games</span><span class="p">:</span>
+    <span class="n">resultDict</span><span class="p">[</span><span class="n">G</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">numSpins</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Simulate'</span><span class="p">,</span> <span class="n">numTrials</span><span class="p">,</span> <span class="s1">'trials of'</span><span class="p">,</span>
+          <span class="n">numSpins</span><span class="p">,</span> <span class="s1">'spins each'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">G</span> <span class="ow">in</span> <span class="n">games</span><span class="p">:</span>
+        <span class="n">pocketReturns</span> <span class="o">=</span> <span class="n">findPocketReturn</span><span class="p">(</span><span class="n">G</span><span class="p">(),</span> <span class="n">numTrials</span><span class="p">,</span>
+                                         <span class="n">numSpins</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">expReturn</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">pocketReturns</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">pocketReturns</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Exp. return for'</span><span class="p">,</span> <span class="n">G</span><span class="p">(),</span> <span class="s1">'='</span><span class="p">,</span>
+             <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">expReturn</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">+</span> <span class="s1">'%'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Simulate 20 trials of 1000 spins each
+Exp. return for Fair Roulette = 6.56%
+Exp. return for European Roulette = -2.26%
+Exp. return for American Roulette = -8.92%
+
+Simulate 20 trials of 10000 spins each
+Exp. return for Fair Roulette = -1.234%
+Exp. return for European Roulette = -4.168%
+Exp. return for American Roulette = -5.752%
+
+Simulate 20 trials of 100000 spins each
+Exp. return for Fair Roulette = 0.8144%
+Exp. return for European Roulette = -2.6506%
+Exp. return for American Roulette = -5.113%
+
+Simulate 20 trials of 1000000 spins each
+Exp. return for Fair Roulette = -0.0723%
+Exp. return for European Roulette = -2.7329%
+Exp. return for American Roulette = -5.212%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We are Sampling, that's why the results will change.
+If we ran a different simulation with a different seed we'd get different numbers.</p>
+<p>When ever you are sampling you can't be guaranteed to get prefect accuracy.It's always possible we get a weird sample and that's not the say that you won't get exactly the right answer.</p>
+<p>This gets us to what's in some sense the fundamental question of all computational statistics, is <strong>How many samples do we need to look at before we can have real, justifiable confidence?</strong></p>
+<p>As we've seen in coins example in the top. Our intuituion tells us that it depends upon the <strong>variability</strong> in the underlying possibilities.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>We have to look at the variability in the data</strong>
+so let's look at first something called variance.
+
+$$\sigma^{2}(X) = \frac{\sum{(x-\mu)}^2}{|X|}$$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Why we are squaring here?<ul>
+<li>Squaring it has one virtue, which is that it means I don't care wheather the difference is positive or negative. And I shouldn't, right? I don't care which side of the mean it's on, But if that's all I wanted to do I could take the absolute value.</li>
+<li>The other thing with squaring is it gives the outliers extra emphasis, because I'm I am sqaring that distance. But you can think it's good or bad. but it's worth knowing it's a fact. </li>
+</ul>
+</li>
+</ul>
+<p><strong>Standard Deviation</strong>:</p>
+<ul>
+<li>The more important thing to think about is standard deviation all by itself is a meaningless number. You always have to think about it in the context of the mean.<ul>
+<li>If I tell you the standard deviation is 100. and I ask you wheather it's big or small, you have no idea. </li>
+<li>If the mean is 100 and the standard deviation is 100, it's pretty big. If the mean is billion and standard deviaiton is 100, it's pretty small. </li>
+<li>So you should never want to look at just the standard deviation. </li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getMeanAndStd</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+    <span class="n">tot</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+        <span class="n">tot</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="p">(</span><span class="n">tot</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Confidence-Levels-and-Intervals">
+<a class="anchor" href="#Confidence-Levels-and-Intervals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Confidence Levels and Intervals<a class="anchor-link" href="#Confidence-Levels-and-Intervals"> </a>
+</h2>
+<ul>
+<li>Insted of estimating an unknown paramater by a single value (e.g., the mean of a set of trials), a confidence interval provides a range that is likely to conatin the unknown value and a confidence that the unknown value lays within that range.</li>
+<li>The retun on betting a pocket 10k times in European roulette is -3.3%. The margian eroor is +/-3.5% with a 95% level of confidence."</li>
+</ul>
+<p><strong>How do we compute Confidence Interval?</strong>
+Most of the time we compute them using Empirical rule.</p>
+<ul>
+<li>The empirical rule says that if i take the data, find the mean, compute the standard deviaion.</li>
+<li>Under <strong>Some Assumptions</strong>[Normal Distribution]<ul>
+<li>~68% of data within one standard deviation of mean</li>
+<li>~95% of data within 1.96 standard deviation of mean</li>
+<li>~99.7% of data within 3 standard deviation of mean.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resultDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">games</span> <span class="o">=</span> <span class="p">(</span><span class="n">FairRoulette</span><span class="p">,</span> <span class="n">EuRoulette</span><span class="p">,</span> <span class="n">AmRoulette</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">G</span> <span class="ow">in</span> <span class="n">games</span><span class="p">:</span>
+    <span class="n">resultDict</span><span class="p">[</span><span class="n">G</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">numSpins</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Simulate betting a pocket for'</span><span class="p">,</span> <span class="n">numTrials</span><span class="p">,</span>
+        <span class="s1">'trials of'</span><span class="p">,</span> <span class="n">numSpins</span><span class="p">,</span> <span class="s1">'spins each'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">G</span> <span class="ow">in</span> <span class="n">games</span><span class="p">:</span>
+        <span class="n">pocketReturns</span> <span class="o">=</span> <span class="n">findPocketReturn</span><span class="p">(</span><span class="n">G</span><span class="p">(),</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="n">numSpins</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">getMeanAndStd</span><span class="p">(</span><span class="n">pocketReturns</span><span class="p">)</span>
+        <span class="n">resultDict</span><span class="p">[</span><span class="n">G</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">numSpins</span><span class="p">,</span>
+                                            <span class="mi">100</span><span class="o">*</span><span class="n">mean</span><span class="p">,</span>
+                                            <span class="mi">100</span><span class="o">*</span><span class="n">std</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Exp. return for'</span><span class="p">,</span> <span class="n">G</span><span class="p">(),</span> <span class="s1">'='</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">mean</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+                <span class="o">+</span> <span class="s1">'%,'</span><span class="p">,</span> <span class="s1">'+/- '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="mf">1.96</span><span class="o">*</span><span class="n">std</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+                <span class="o">+</span> <span class="s1">'% with 95</span><span class="si">% c</span><span class="s1">onfidence'</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Simulate betting a pocket for 20 trials of 100 spins each
+Exp. return for Fair Roulette = -2.8%, +/- 116.156% with 95% confidence
+Exp. return for European Roulette = -28.0%, +/- 77.295% with 95% confidence
+Exp. return for American Roulette = -11.8%, +/- 147.122% with 95% confidence
+
+Simulate betting a pocket for 20 trials of 1000 spins each
+Exp. return for Fair Roulette = -4.24%, +/- 34.234% with 95% confidence
+Exp. return for European Roulette = -2.8%, +/- 28.136% with 95% confidence
+Exp. return for American Roulette = 4.22%, +/- 35.03% with 95% confidence
+
+Simulate betting a pocket for 20 trials of 10000 spins each
+Exp. return for Fair Roulette = 1.358%, +/- 11.674% with 95% confidence
+Exp. return for European Roulette = -1.414%, +/- 14.178% with 95% confidence
+Exp. return for American Roulette = -6.742%, +/- 6.269% with 95% confidence
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Assumptions Underlying Empirical Rule</strong></p>
+<ul>
+<li>The mean estimation error is zero</li>
+<li>The distribution of the error in the estimates is normal</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="tejakummarikuntla/notes"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/notes/math/2020/01/28/Monte-Carlo.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/notes/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/notes/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/notes/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Learn | Innovate | Deliver.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/tejakummarikuntla" title="tejakummarikuntla"><svg class="svg-icon grey"><use xlink:href="/notes/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/crossmux" title="crossmux"><svg class="svg-icon grey"><use xlink:href="/notes/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
