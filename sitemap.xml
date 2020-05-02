@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://tejakummarikuntla.github.io/notes/programming/2019/10/12/First-Class-Functions-in-python.html</loc>
+<lastmod>2019-10-12T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://tejakummarikuntla.github.io/notes/programming/2019/10/14/Closures-in-python.html</loc>
+<lastmod>2019-10-14T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://tejakummarikuntla.github.io/notes/programming/2019/10/15/Decorators-in-python.html</loc>
+<lastmod>2019-10-15T00:00:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://tejakummarikuntla.github.io/notes/math/2019/12/24/Log-Transformation.html</loc>
 <lastmod>2019-12-24T00:00:00-06:00</lastmod>
 </url>
@@ -9,7 +21,7 @@
 <lastmod>2020-01-23T00:00:00-06:00</lastmod>
 </url>
 <url>
-<loc>https://tejakummarikuntla.github.io/notes/math/data%20science/2020/01/24/Descriptive-Statistics-Intro.html</loc>
+<loc>https://tejakummarikuntla.github.io/notes/math/2020/01/24/Descriptive-Statistics-Intro.html</loc>
 <lastmod>2020-01-24T00:00:00-06:00</lastmod>
 </url>
 <url>
@@ -21,8 +33,24 @@
 <lastmod>2020-01-28T00:00:00-06:00</lastmod>
 </url>
 <url>
+<loc>https://tejakummarikuntla.github.io/notes/math/2020/01/31/Maximum-Likelyhood-Estimation.html</loc>
+<lastmod>2020-01-31T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html</loc>
+<lastmod>2020-02-04T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://tejakummarikuntla.github.io/notes/eda/2020/04/14/Developer-101-UI-Design-Data-Analysis.html</loc>
+<lastmod>2020-04-14T00:00:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://tejakummarikuntla.github.io/notes/eda/2020/04/23/EDA-US-Salary-Dataset.html</loc>
 <lastmod>2020-04-23T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://tejakummarikuntla.github.io/notes/eda/2020/04/24/Developer-101-A-Step-Forward-with-Flutter.html</loc>
+<lastmod>2020-04-24T00:00:00-05:00</lastmod>
 </url>
 <url>
 <loc>https://tejakummarikuntla.github.io/notes/algorithms/2020/04/27/Counting-Sort.html</loc>
@@ -51,5 +79,8 @@
 </url>
 <url>
 <loc>https://tejakummarikuntla.github.io/notes/categories/</loc>
+</url>
+<url>
+<loc>https://tejakummarikuntla.github.io/notes/page2/</loc>
 </url>
 </urlset>

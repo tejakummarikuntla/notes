@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Markov Chains | tejakummarikuntla</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Markov Chains" />
+<meta name="author" content="Teja Kummarikuntla" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Math behind the various transitions of Markov Chains" />
+<meta property="og:description" content="The Math behind the various transitions of Markov Chains" />
+<link rel="canonical" href="https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html" />
+<meta property="og:url" content="https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html" />
+<meta property="og:site_name" content="tejakummarikuntla" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-04T00:00:00-06:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"The Math behind the various transitions of Markov Chains","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html","headline":"Markov Chains","dateModified":"2020-02-04T00:00:00-06:00","datePublished":"2020-02-04T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/notes/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://tejakummarikuntla.github.io/notes/feed.xml" title="tejakummarikuntla" /><link rel="shortcut icon" type="image/x-icon" href="/notes/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Markov Chains | tejakummarikuntla</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Markov Chains" />
+<meta name="author" content="Teja Kummarikuntla" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Math behind the various transitions of Markov Chains" />
+<meta property="og:description" content="The Math behind the various transitions of Markov Chains" />
+<link rel="canonical" href="https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html" />
+<meta property="og:url" content="https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html" />
+<meta property="og:site_name" content="tejakummarikuntla" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-04T00:00:00-06:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Teja Kummarikuntla"},"description":"The Math behind the various transitions of Markov Chains","mainEntityOfPage":{"@type":"WebPage","@id":"https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html"},"@type":"BlogPosting","url":"https://tejakummarikuntla.github.io/notes/math/2020/02/04/Markov-Chains.html","headline":"Markov Chains","dateModified":"2020-02-04T00:00:00-06:00","datePublished":"2020-02-04T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://tejakummarikuntla.github.io/notes/feed.xml" title="tejakummarikuntla" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/notes/">tejakummarikuntla</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/notes/contact/">Contact</a><a class="page-link" href="/notes/search/">Search</a><a class="page-link" href="/notes/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Markov Chains</h1><p class="page-description">The Math behind the various transitions of Markov Chains</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-04T00:00:00-06:00" itemprop="datePublished">
+        Feb 4, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Teja Kummarikuntla</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/notes/categories/#Math">Math</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/tejakummarikuntla/notes/tree/master/_notebooks/2020-02-04-Markov-Chains.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/notes/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/tejakummarikuntla/notes/master?filepath=_notebooks%2F2020-02-04-Markov-Chains.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notes/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/tejakummarikuntla/notes/blob/master/_notebooks/2020-02-04-Markov-Chains.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notes/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Markov-Chains">Markov Chains </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#One-step-Transition">One step Transition </a></li>
+<li class="toc-entry toc-h3"><a href="#Two-Step-Transition">Two Step Transition </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Specific-Conditional-Probabilites">Specific Conditional Probabilites </a></li>
+<li class="toc-entry toc-h4"><a href="#Long-Run-Distribution-Vector">Long-Run Distribution Vector </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#Steady-State-Vectors">Steady-State Vectors </a></li>
+<li class="toc-entry toc-h3"><a href="#Gambler's-Ruin">Gambler&#39;s Ruin </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-02-04-Markov-Chains.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Markov-Chains">
+<a class="anchor" href="#Markov-Chains" aria-hidden="true"><span class="octicon octicon-link"></span></a>Markov Chains<a class="anchor-link" href="#Markov-Chains"> </a>
+</h1>
+<ul>
+<li>Markov chains are the combination of probabilities and matrix operations</li>
+<li>They model a process hat proceeds in steps (time, sequence, trails, etc.); like serires of porbability trees</li>
+<li>The model can be in opne "state" at each step</li>
+<li>When the next setp occurs, the porcess can be in the same state or move to another state.</li>
+<li>Movements between states are defined by porbabilites</li>
+<li>All probabilites exiting a state must add up ot 1</li>
+<li>We can then find the probabilites of being in any given state many steps into the process</li>
+<li>ref: <a href="https://www.youtube.com/channel/UCFrjdcImgcQVyFbK04MBEhA">https://www.youtube.com/channel/UCFrjdcImgcQVyFbK04MBEhA</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/notes/images/copied_from_nb/Images/Math/State_Transition_Diagram.png" alt="State Transition Diagram"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Tranistion Matrix for the above State Transition Diagram:</p>
+\begin{equation*}
+To \\ From
+\begin{bmatrix}
+1 \rightarrow 1 &amp; 1 \rightarrow 2 &amp; 1 \rightarrow 3 \\
+2 \rightarrow 1 &amp; 2 \rightarrow 2 &amp; 2 \rightarrow 3 \\
+3 \rightarrow 1 &amp; 3 \rightarrow 2 &amp; 3 \rightarrow 3
+\end{bmatrix}
+\end{equation*}\begin{equation*}
+To \\ From
+\begin{bmatrix}
+.2 &amp; .4 &amp; .4 \\
+.1 &amp; 0 &amp; .9 \\
+.7 &amp; 0 &amp; .3
+\end{bmatrix}
+\end{equation*}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>Noitce that each row sums to 1
+</div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/notes/images/copied_from_nb/Images/Math/Probability_Tree.png" alt="sdf"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="One-step-Transition">
+<a class="anchor" href="#One-step-Transition" aria-hidden="true"><span class="octicon octicon-link"></span></a>One step Transition<a class="anchor-link" href="#One-step-Transition"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># one step conditional transition matrix</span>
+<span class="c1"># [[High to High; High to Low],</span>
+<span class="c1"># [Low to High; Low to Low]]</span>
+<span class="n">tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span> <span class="o">.</span><span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="o">.</span><span class="mi">85</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="c1"># Initial State Vector which says picking at random,</span>
+<span class="c1"># 10% areunder 'High Risk' and 90% are under 'Low Risk'</span>
+<span class="c1"># [[High; Low]]</span>
+<span class="n">isv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Now we want to find th porbabilites of </span>
+<span class="c1"># high and low one year from now we multiply those together.</span>
+<span class="c1"># Initial State Vector * Transition Matrix </span>
+<span class="n">one_year_pHL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">isv</span><span class="p">,</span> <span class="n">tm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">one_year_pHL</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[0.195 0.805]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we have the Probabilities of High risk and Low risk one year from now.
+So, If a new customer renews after one year, the porbability he/she is High Risk or Low Risk is .195 and .085 respectively</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Two-Step-Transition">
+<a class="anchor" href="#Two-Step-Transition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Two Step Transition<a class="anchor-link" href="#Two-Step-Transition"> </a>
+</h3>
+<p>Question:
+If all of its new policy holder this year are representative of the dirving population in general, what will be the company's high risk/low risk distribution two years from now?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># One_step_Transition_vector * Transition_matrx</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">one_year_pHL</span><span class="p">,</span> <span class="n">tm</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.2377, 0.7622]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see here, our high-risk group has a probability of 0.2377 and our low risk probability is 0.7622 which add up to one.</p>
+<p>Now, in a practical sense we can really see here just much higer risk our drivers are than the general population, so a new dirver comes into our office to signup and after two years we can see the probability of being high-risk is 0.2377.</p>
+<p>If a new customer renews after two years, the probability he/she is High Risk or Low risk is 0.2377 and 0.7622 respectively</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># initial_state_vector * transition_matrix^2</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">isv</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span><span class="n">tm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.2378, 0.7622]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can use the initial State vector constant
+and perfome square for the transition matrix for two step transition
+to perform three step transition we can perfome cube of the transition matrix.
+ransition probability values of Hight Risk and Low risk</p>
+<p>Here for getting two step transition probability values of Hight Risk and Low risk
+<strong>inital_state_vecot <em> transition_matirx</em>2 == 
+one_step_transition_prob_values * transitio_matrix</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Specific-Conditional-Probabilites">
+<a class="anchor" href="#Specific-Conditional-Probabilites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Specific Conditional Probabilites<a class="anchor-link" href="#Specific-Conditional-Probabilites"> </a>
+</h4>
+<p>If a customer is placed in the High Risk category when they sign up, what is the probability that customer will be High Risk or Low Risk two years from now?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span> <span class="n">tm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.42, 0.58]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># considering only for High Risk:</span>
+<span class="n">h_hl_hl_sum</span> <span class="o">=</span> <span class="o">.</span><span class="mi">036</span><span class="o">+.</span><span class="mi">024</span><span class="o">+.</span><span class="mi">006</span><span class="o">+.</span><span class="mi">034</span>
+<span class="n">h_hl_h_sum</span> <span class="o">=</span> <span class="o">.</span><span class="mi">036</span><span class="o">+.</span><span class="mi">006</span>
+<span class="n">h_hl_l_sum</span> <span class="o">=</span> <span class="o">.</span><span class="mi">024</span><span class="o">+.</span><span class="mi">034</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Customer's High Risk"</span><span class="p">,</span><span class="n">h_hl_h_sum</span><span class="o">/</span><span class="n">h_hl_hl_sum</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Customer's Low Risk"</span><span class="p">,</span> <span class="n">h_hl_l_sum</span><span class="o">/</span><span class="n">h_hl_hl_sum</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Customer's High Risk 0.41999999999999993
+Customer's Low Risk 0.58
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If a customer is placed in the Low Risk category when they sign up, what is the probability that customer will be High Risk or Low Risk two years from now?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span> <span class="n">tm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.2175, 0.7825]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">l_hl_hl_sum</span> <span class="o">=</span> <span class="o">.</span><span class="mi">081</span><span class="o">+.</span><span class="mi">054</span><span class="o">+.</span><span class="mi">11475</span><span class="o">+.</span><span class="mi">65025</span>
+<span class="n">l_hl_h_sum</span> <span class="o">=</span> <span class="o">.</span><span class="mi">081</span><span class="o">+.</span><span class="mi">11475</span>
+<span class="n">l_hl_l_sum</span> <span class="o">=</span> <span class="o">.</span><span class="mi">054</span><span class="o">+.</span><span class="mi">65025</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l_hl_h_sum</span><span class="o">/</span><span class="n">l_hl_hl_sum</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l_hl_l_sum</span><span class="o">/</span><span class="n">l_hl_hl_sum</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.2175
+0.7825
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>
+$$[Initial State Vector][Transition Matrix]^m = [m - State Probabilities]$$
+
+State probabilites <code>m</code> years from now</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Long-Run-Distribution-Vector">
+<a class="anchor" href="#Long-Run-Distribution-Vector" aria-hidden="true"><span class="octicon octicon-link"></span></a>Long-Run Distribution Vector<a class="anchor-link" href="#Long-Run-Distribution-Vector"> </a>
+</h4>
+<p>Probability Distribution for each state after <code>m</code> steps = $v.P.P.P...P(m  times) = vP^m$
+
+$$vP^m$$
+</p>
+<ul>
+<li>$v$ Initial State Vector</li>
+<li>$P$ Transition Matrix</li>
+<li>$m$ Number of Steps in the future we are intrested in </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Steady-State-Vectors">
+<a class="anchor" href="#Steady-State-Vectors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Steady-State Vectors<a class="anchor-link" href="#Steady-State-Vectors"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="n">powers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">po</span> <span class="ow">in</span> <span class="n">powers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"isv * transition_matrix^</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">po</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">isv</span><span class="p">,</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span> <span class="n">po</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>isv * transition_matrix^2 [[0.2378 0.7622]]
+isv * transition_matrix^3 [[0.257 0.743]]
+isv * transition_matrix^5 [[0.2695 0.7305]]
+isv * transition_matrix^10 [[0.2727 0.7273]]
+isv * transition_matrix^20 [[0.2727 0.7273]]
+isv * transition_matrix^25 [[0.2727 0.7273]]
+isv * transition_matrix^30 [[0.2727 0.7273]]
+isv * transition_matrix^40 [[0.2727 0.7273]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we are changing the number of years in to the future we are intrested in, when we got down to <code>20</code> years into the future and then we did for <code>25</code>, <code>30..</code>. Notice the porbabilites seemed to have stablilized they steadied out, NO matter how many more years and of the future we went they didn't change they stoped changing.
+This is called <strong>Steady-State Vectors</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Eventually, continuing to multiply our answer by the transition matrix again has no effect on the outcome. Twenty-five years in the future is the same as 50 years into the future, etc.,
+
+$$v_{\infty}P = v_{\infty}$$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>General Steady State Vectors:</strong>
+
+$$vP = v$$
+</p>
+<ul>
+<li>$v$ Initial State Matrix</li>
+<li>$P$ Transition Matrix</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{gather}
+\begin{bmatrix} x &amp; y \end{bmatrix}
+\begin{bmatrix} .6 &amp; .4 \\ .15 &amp; .85 \end{bmatrix}=
+\begin{bmatrix} x &amp; y \end{bmatrix}
+\end{gather}
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">([[</span><span class="mf">0.2727</span><span class="p">,</span> <span class="mf">0.7273</span><span class="p">]],</span> <span class="n">tm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[0.2727 0.7273]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{gather}
+\begin{bmatrix} x &amp; y \end{bmatrix}
+\begin{bmatrix} .6 &amp; .4 \\ .15 &amp; .85 \end{bmatrix}=
+\begin{bmatrix} x &amp; y \end{bmatrix}
+\end{gather}<p>
+$$[.6x+.15y \ \ .4x+.85y] = [x \ y]$$
+
+
+$$.6x+.15y = x \\ .4x+.85y = y$$
+
+
+$$-.4x+.15y=0 \\ .4x-.85y = 0 $$
+
+If we mulitply one of the equaitons by $-$ both the equations are same
+.Since the equaitons are identical, we can make them into one.
+
+$$.4x-.15y = 0 \ \ \ -eq(1)$$
+
+Now, we know that the initial state vector has to equal to 1 so, what ever $x$ is and what ever $y$ is they have to add up to 1
+
+$$x+y = 1 \ \ \ -eq(2)$$
+
+By solving eq(1) and eq(2),
+
+$$x = \frac{.15}{.55} = 0.2727 \\ y = \frac{3}{11} = .7273$$
+</p>
+\begin{gather}
+\begin{bmatrix} \frac{3}{11} &amp; \frac{8}{11} \end{bmatrix} \dot{}
+\begin{bmatrix} .6 &amp; .4 \\ .15 &amp; .85 \end{bmatrix}=
+\begin{bmatrix} \frac{3}{11} &amp; \frac{8}{11} \end{bmatrix}
+\end{gather}<p><strong>Method 2:</strong>
+
+$$vP = v \\ vP-v = 0 \\ v(P-1)=0$$
+
+In matrix mulitplication an identity matrix $I$ is the equvilent of $1$; $v.I=v$
+
+$$v(P-I) = 0$$
+
+By using Gaussian method of solving equations, we can obatin x and y values which which in return are same as above</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Gambler's-Ruin">
+<a class="anchor" href="#Gambler's-Ruin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gambler's Ruin<a class="anchor-link" href="#Gambler's-Ruin"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A reluctant gambler is dragged ot the riverboat casino by his more free-wheeling friends. He takes only \$50\ ot gamble with.</p>
+<p>Since he doesnot know much about gamling, he decides to play roulette. At each spin, he places \$25 on red. If red occurs, he wins \$25. If black comes up, he loses his \$25. Therefore the odds of winning are 50% (it's lower in the actual game.)</p>
+<p>He will quit playing when he either has zero money left, or is up \$25(\$75 total).</p>
+<p>Let's model this process as a Markov Chain and examine its long-run behavior.</p>
+\begin{equation*}
+\$0\ \$25 \ \$50 \ \$75   \\ \$0\ \$25 \ \$50 \ \$75
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+.5 &amp; 0 &amp; .5 &amp; 0\\
+0 &amp; .5 &amp; 0 &amp; .5 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{equation*}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's consider $P$ as the above state transition matrix.
+When we run this process many steps in the future.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1.  , 0.  , 0.  , 0.  ],
+       [0.5 , 0.25, 0.  , 0.25],
+       [0.25, 0.  , 0.25, 0.5 ],
+       [0.  , 0.  , 0.  , 1.  ]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00],
+       [6.6602e-01, 9.7656e-04, 0.0000e+00, 3.3301e-01],
+       [3.3301e-01, 0.0000e+00, 9.7656e-04, 6.6602e-01],
+       [0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00],
+       [6.6667e-01, 0.0000e+00, 2.9802e-08, 3.3333e-01],
+       [3.3333e-01, 2.9802e-08, 0.0000e+00, 6.6667e-01],
+       [0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>
+$$P^{\infty} = [x \ \ 0 \ \ 0 \ \ (1-x)]$$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Gambler started with \$ 50$; which is state 3. Therefore we can set up an inital state vector that look like this:
+
+$$v = \begin{bmatrix} 0 &amp; 0 &amp; 1 &amp; 0 \end{bmatrix}$$
+</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v50</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">v50</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1, 4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v50</span><span class="p">,</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[3.3333e-01, 0.0000e+00, 8.8818e-16, 6.6667e-01]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the Gambler started with \$25$ he would begin in state 2. Therefore we can set up aninitial vector that looks like this 
+
+$$v = \begin{bmatrix} 0 &amp; 1 &amp; 0 &amp; 0 \end{bmatrix}$$
+</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v25</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">v50</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1, 4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v25</span><span class="p">,</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[6.6667e-01, 8.8818e-16, 0.0000e+00, 3.3333e-01]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="tejakummarikuntla/notes"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/notes/math/2020/02/04/Markov-Chains.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/notes/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/notes/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/notes/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Learn | Innovate | Deliver.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/tejakummarikuntla" title="tejakummarikuntla"><svg class="svg-icon grey"><use xlink:href="/notes/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/crossmux" title="crossmux"><svg class="svg-icon grey"><use xlink:href="/notes/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
