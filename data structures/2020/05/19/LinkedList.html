@@ -165,11 +165,9 @@ window.onload = wrap_img;
 </li>
 <li class="toc-entry toc-h1"><a href="#Doubly-Linked-list">Doubly Linked list </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Advantages">Advantages </a>
-<ul>
+<li class="toc-entry toc-h3"><a href="#Advantages">Advantages </a></li>
 <li class="toc-entry toc-h3"><a href="#A-Single-node:">A Single node: </a></li>
-</ul>
-</li>
+<li class="toc-entry toc-h3"><a href="#Doubly-Linked-list-operations">Doubly Linked list operations </a></li>
 <li class="toc-entry toc-h2"><a href="#Twin">Twin </a></li>
 </ul>
 </li>
@@ -679,9 +677,9 @@ Node Link: None
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Advantages">
+<h3 id="Advantages">
 <a class="anchor" href="#Advantages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advantages<a class="anchor-link" href="#Advantages"> </a>
-</h2>
+</h3>
 <ul>
 <li>A doubly linked list can be traversesd both directions: forward and backward.</li>
 <li>The remove operation is more efficient if the node is given</li>
@@ -939,6 +937,27 @@ Node next: None
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Doubly-Linked-list-operations">
+<a class="anchor" href="#Doubly-Linked-list-operations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Doubly Linked list operations<a class="anchor-link" href="#Doubly-Linked-list-operations"> </a>
+</h3>
+<p><strong>considering only Worst Cases</strong></p>
+<ul>
+<li>
+<code>insertAtBeginning()</code>  : $O(1)$</li>
+<li>
+<code>insertAtEnd()</code> : $O(n)$</li>
+<li>
+<code>deleteNode()</code> : $O(1)$</li>
+<li>
+<code>display()</code> : $O(1)$</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Twin">
 <a class="anchor" href="#Twin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Twin<a class="anchor-link" href="#Twin"> </a>
 </h2>
@@ -1050,9 +1069,25 @@ Node next: None
             <span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="o">.</span><span class="n">prev</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p1</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">"List reversed</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-                    
+                
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
     
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">'__main__'</span><span class="p">:</span> 
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">'__main__'</span><span class="p">:</span> 
 
     <span class="n">llist</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span> 
     <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
@@ -1092,7 +1127,6 @@ Node next: None
 </div>
 </div>
 
-    </details>
 <div class="output_wrapper">
 <div class="output">
 
@@ -1134,7 +1168,7 @@ Enter your choice :
 
 Enter your choice : 
 2
-30
+20
 1.Display
 
 2.Insert new node at the beginning
@@ -1152,7 +1186,25 @@ Enter your choice :
 
 Enter your choice : 
 2
-40
+30
+1.Display
+
+2.Insert new node at the beginning
+
+3.Insert new node at the end
+
+4.Insert new node after the given node
+
+5.Delete node
+
+6.Reverse list
+
+7.Quit
+
+
+Enter your choice : 
+5
+10
 1.Display
 
 2.Insert new node at the beginning
@@ -1189,9 +1241,8 @@ List reversed
 
 Enter your choice : 
 1
-10
+20
 30
-40
 1.Display
 
 2.Insert new node at the beginning
@@ -1220,15 +1271,6 @@ Enter your choice :
 An exception has occurred, use %tb to see the full traceback.
 
 <span class="ansi-red-intense-fg ansi-bold">SystemExit</span><span class="ansi-red-intense-fg ansi-bold">:</span> 0
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\Users\tejakummarikuntla\anaconda3\lib\site-packages\IPython\core\interactiveshell.py:3339: UserWarning: To exit: use 'exit', 'quit', or Ctrl-D.
-  warn("To exit: use 'exit', 'quit', or Ctrl-D.", stacklevel=1)
 </pre>
 </div>
 </div>
