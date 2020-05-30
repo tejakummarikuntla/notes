@@ -111,7 +111,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      8 min read
+      9 min read
     
 </span></p>
 
@@ -169,6 +169,15 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#A-Single-node:">A Single node: </a></li>
 <li class="toc-entry toc-h3"><a href="#Doubly-Linked-list-operations">Doubly Linked list operations </a></li>
 <li class="toc-entry toc-h2"><a href="#Twin">Twin </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Circular-Linked-list">Circular Linked list </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Circular-Single-Linked-list">Circular Single Linked list </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Circular-Singly-Linked-list-operations">Circular Singly Linked list operations </a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul><!--
@@ -244,8 +253,8 @@ window.onload = wrap_img;
 </h2>
 <ul>
 <li>Waste memory because of the references </li>
-<li>Nodes in a linkedlist mus be read in ourder from the beginning as linked list have sequential accwss ( arrays items can be reached via indexes in O(1) time )</li>
-<li>Difficulties arise in lined liist when it comes ot reverse traveresing. Singly lined list are extermely diffcult to navigate backwards.</li>
+<li>Nodes in a linkedlist must be read in order from the beginning as linked list have sequential access ( arrays items can be reached via indexes in O(1) time )</li>
+<li>Difficulties arise in linked list when it comes ot reverse traveresing. Singly lined list are extermely diffcult to navigate backwards.</li>
 <li>Solution: Doubly linkked list -&gt; easier to read, but memory is wasted in allocating space ofr a back pointer.</li>
 </ul>
 
@@ -872,29 +881,6 @@ Node next: None
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>30
-20
-10
-*******
-30
-20
-10
-1
-2
-3
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     
 
@@ -1281,6 +1267,205 @@ An exception has occurred, use %tb to see the full traceback.
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Circular-Linked-list">
+<a class="anchor" href="#Circular-Linked-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Circular Linked list<a class="anchor-link" href="#Circular-Linked-list"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Circular-Single-Linked-list">
+<a class="anchor" href="#Circular-Single-Linked-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Circular Single Linked list<a class="anchor-link" href="#Circular-Single-Linked-list"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Node Info:"</span><span class="p">,</span><span class="n">first</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Node next:"</span><span class="p">,</span><span class="n">first</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Node Info: 10
+Node next: None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#collapse-hide</span>
+
+<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">def</span> <span class="nf">insertAtBeginning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="n">newNode</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">newNode</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">):</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">newNode</span>
+            <span class="n">newNode</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">newNode</span>
+            
+    <span class="k">def</span> <span class="nf">insertAtEnd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="n">newNode</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">newNode</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">):</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">newNode</span>
+            <span class="n">newNode</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+    
+    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">csll</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">insertAtBeginning</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">insertAtBeginning</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">insertAtBeginning</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"*******"</span><span class="p">)</span>
+
+<span class="n">csll</span><span class="o">.</span><span class="n">insertAtEnd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">insertAtEnd</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">insertAtEnd</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">csll</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>30
+20
+10
+*******
+30
+20
+10
+1
+2
+3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Circular-Singly-Linked-list-operations">
+<a class="anchor" href="#Circular-Singly-Linked-list-operations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Circular Singly Linked list operations<a class="anchor-link" href="#Circular-Singly-Linked-list-operations"> </a>
+</h3>
+<p><strong>considering only Worst Cases</strong></p>
+<ul>
+<li>
+<code>insertAtBeginning()</code>  : $O(n)$</li>
+<li>
+<code>insertAtEnd()</code> : $O(n)$</li>
+<li>
+<code>display()</code> : $O(n)$</li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
 
 
